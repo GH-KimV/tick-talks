@@ -2,7 +2,7 @@
 
 /* Global Styles */
 :root {
-  --primary-color: #80AC9F;
+  --primary-color: white;
   --dark-color: #333333;
   --light-color: #f4f4f4;
   --danger-color: #dc3545;
@@ -19,8 +19,8 @@ body {
   font-family: 'Roboto', sans-serif;
   font-size: 1rem;
   line-height: 1.6;
-  background: var(--light-color);
-  color: #333;
+  background: var(--primary-color);
+  /* color: #333; */
 }
 
 a {
@@ -61,7 +61,26 @@ img {
 }
 
 .about-container {
-  padding: 1rem 2rem;
+  text-align: center;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.about-container h1 {
+  color: rgb(156, 141, 241);
+  font-size: 3rem;
+  font-weight: normal;
+  margin-bottom: 0.5rem;
+}
+
+.about-container p {
+  font-size: 1.4rem;
+  font-weight: lighter;
+  color: #333;
+
 }
 
 /* Text Styles*/
@@ -266,7 +285,7 @@ img {
 .badge-primary,
 .alert-primary {
   background: var(--primary-color);
-  color: #fff;
+  color: #333;
 }
 
 .btn-light,
@@ -410,8 +429,13 @@ table th {
   display: flex;
 }
 
+.navbar li {
+  margin: 0 1rem;
+  color: #333;
+}
+
 .navbar a {
-  color: #fff;
+  color: black;
   padding: 0.45rem;
   margin: 0 0.25rem;
 }
