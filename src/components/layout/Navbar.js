@@ -6,11 +6,11 @@ const Navbar = ({ icon, title }) => {
   return (
     <nav className='navbar bg-primary'>
       <h1>
-        <i className={icon} /> {title}
+      {title}  <i className={icon} />
       </h1>
       <ul>
         <li>
-          <Link to='/'>Home</Link>
+          <Link to='/'>Trending</Link>
         </li>
         <li>
           <Link to='/about'>About</Link>
@@ -22,7 +22,7 @@ const Navbar = ({ icon, title }) => {
 
 Navbar.defaultProps = {
   title: 'Tick Talks',
-  icon: 'fa fa-comment-o'
+  icon: 'fa fa-comment-o',
 };
 
 Navbar.propTypes = {
