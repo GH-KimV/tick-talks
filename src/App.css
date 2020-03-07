@@ -434,6 +434,10 @@ table th {
   color: #333;
 }
 
+.navbar li a:hover{
+  color:rgb(89, 75, 180)
+}
+
 .navbar a {
   color: black;
   padding: 0.45rem;
