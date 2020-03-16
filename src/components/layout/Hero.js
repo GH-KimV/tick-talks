@@ -6,12 +6,12 @@ import Typing from 'react-typing-animation';
 const Hero = () => {
     return (
         <div className='hero'>
-            <Typing speed={20}>
-                <h1 className='hero-header'>Check out the latest tweets stream on your favorite stock!</h1>
-            </Typing>
-            <FadeIn delay={2500}>
+            {/* <Typing speed={20}> */}
+                <p className='hero-header'>Search twitter stock feeds.</p>
+            {/* </Typing> */}
+            {/* <FadeIn delay={2500}>
                 <img src={convo_gif} alt='gif' className='convo-gif' />
-            </FadeIn>
+            </FadeIn> */}
         </div>
     );
 };
