@@ -28,8 +28,7 @@ export default class App extends Component {
 
     onSubmit = e => {
         e.preventDefault();
-        if (this.state.text.length > 5){
-
+        if (this.state.text.length > 5) {
         }
         this.getData(this.state.text);
         this.setState({ isClear: false });
@@ -60,23 +59,29 @@ export default class App extends Component {
                                     <input
                                         type='text'
                                         name='text'
-                                        placeholder='Enter your stock symbol'
+                                        placeholder='Enter stock symbol, e.g. AAPL'
                                         value={this.text}
                                         onChange={this.onChange}
                                     />
+                                {this.state.data.length < 1 && (
 
                                     <input
                                         type='submit'
                                         value='Search'
-                                        className='btn btn-primary btn-block'
+                                        className='btn-primary'
                                     />
+                                )}
+
                                 </form>
-                                <button
-                                    className='btn btn-light btn-block'
-                                    onClick={this.clearTweets}
-                                >
-                                    Clear
-                                </button>
+                                {this.state.data.length > 0 && (
+                                    <button
+                                        className='btn btn-light'
+                                        onClick={this.clearTweets}
+                                    >
+                                        Clear
+                                    </button>
+                                )}
+
                                 <div className='sub-container'>
                                     {this.state.data.map(tweet => (
                                         <TweetItem
