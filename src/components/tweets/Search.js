@@ -1,45 +1,42 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
 
-const Search = ({ searchTweets, clearTweets, Alert }) => {
-    const [text, setText] = useState('');
+// const Search = ({ getData, clearTweets, setAlert }) => {
+//     const [text, setText] = useState('');
 
-    const onSubmit = e => {
-        e.preventDefault();
-        if (text === '') {
-            Alert('Please enter a stock symbol', 'light');
-        } else {
-            searchTweets(text);
-            setText('');
-        }
-    }
+//     const onSubmit = e => {
+//         e.preventDefault();
+//         if (text === '') {
+//             setAlert('Please enter a stock symbol', 'light');
+//         } else {
+//             getData(text);
+//             setText('');
+//         }
+//     };
 
-    const onChange = e => {
-        setText(e.target.value);
-    }
+//     const onChange = e => {
+//         setText(e.target.value);
+//     };
 
-    return (
-        <div>
-            <form className='form' onSubmit={onSubmit}>
-                <input
-                    type='text'
-                    name='text'
-                    placeholder='Enter your stock symbol'
-                    value={text}
-                    onChange={onChange}
-                />
+//     return (
+//         <div>
+//             <form className='form' onSubmit={onSubmit}>
+//                 <input
+//                     type='text'
+//                     name='text'
+//                     placeholder='Enter your stock symbol'
+//                     value={text}
+//                     onChange={onChange}
+//                 />
 
-                <input
-                    type='submit'
-                    value='Search'
-                    className='btn btn-primary btn-block'
-                />
-            </form>
+//                 <input type='submit' value='Search' className='btn-primary' />
+//             </form>
+//             {/* {this.state.data.length > 0 && (
+//                 <button className='btn-light' onClick={clearTweets}>
+//                     Clear
+//                 </button>
+//             )} */}
+//         </div>
+//     );
+// };
 
-            <button className='btn btn-light btn-block' onClick={clearTweets}>
-                Clear
-            </button>
-        </div>
-    );
-};
-
-export default Search;
+// export default Search;
