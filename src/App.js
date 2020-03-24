@@ -14,7 +14,8 @@ export default class App extends Component {
             data: [],
             text: '',
             showLoading: false,
-            alert: null
+            alert: null,
+            isError: false
         };
     }
 
@@ -31,19 +32,32 @@ export default class App extends Component {
 
     getData = text => {
         fetch(`https://api.stocktwits.com/api/2/streams/symbol/${text}.json`)
-            .then(response => response.json())
+            .then(response => {
+                if (response.status >= 200 && response.status <= 299) {
+                    return response.json();
+                } else {
+                    throw Error(response.statusText);
+                }
+            })
             .then(data => {
                 this.setState({
                     data: data.messages
                 });
-            });
+            })
+            .catch(
+                error => alert('Please enter a valid stock symbol', error),
+                this.setState({ isError: true }),
+                setTimeout(() => {
+                    this.setState({
+                        isError: false
+                    });
+                }, 2000)
+            );
     };
 
     onSubmit = e => {
         e.preventDefault();
-        // if (this.state.text.length > 5 || this.state.text === '') {
-        if (this.state.text === '' ) {
-            // this.setAlert('Please enter a stock symbol', 'light');
+        if (this.state.text === '') {
             this.setAlert('Please enter a stock symbol', 'light');
             setTimeout(() => this.setState({ alert: null }), 5000);
         } else {
@@ -53,7 +67,6 @@ export default class App extends Component {
 
     onChange = e => {
         this.setState({ text: e.target.value });
-        // console.log(this.state.text);
     };
 
     clearTweets = () => {
@@ -63,7 +76,6 @@ export default class App extends Component {
     };
 
     setAlert = (msg, type) => {
-        // console.log('alert');
         this.setState({ alert: { msg, type } });
         setTimeout(() => this.setState({ alert: null }), 5000);
     };
@@ -77,6 +89,15 @@ export default class App extends Component {
                         <Route exact path='/'>
                             <div className='container'>
                                 <Alert alert={this.state.alert} />
+                                <div
+                                    className={`loading-logo ${
+                                        this.state.isError
+                                            ? 'title-shown'
+                                            : 'hidden'
+                                    }`}
+                                >
+                                    <Loader />
+                                </div>
                                 <div
                                     className={`loading-logo ${
                                         this.state.showLoading
@@ -94,7 +115,7 @@ export default class App extends Component {
                                     }`}
                                 >
                                     <p className='hero-header'>
-                                        Search twitter stock feeds.
+                                        Search Stocktwits feeds.
                                     </p>
                                     <form
                                         className='form'
@@ -103,7 +124,7 @@ export default class App extends Component {
                                         <input
                                             type='text'
                                             name='text'
-                                            placeholder='Enter your stock symbol'
+                                            placeholder='Enter stock symbol'
                                             value={this.state.text}
                                             onChange={this.onChange}
                                         />
@@ -129,7 +150,7 @@ export default class App extends Component {
                                     <div className>
                                         {this.state.data.length > 0 && (
                                             <h3 className='trending-header'>
-                                                {this.state.text} Trending
+                                                ${this.state.text} Trending
                                             </h3>
                                         )}
                                     </div>
