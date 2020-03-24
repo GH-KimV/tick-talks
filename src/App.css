@@ -43,7 +43,7 @@ img {
 
 /* Utilities */
 .hero {
-    margin-top: 4rem;
+    margin-top: 6rem;
     width: 100%;
 }
 
@@ -556,7 +556,7 @@ table th {
     top: 50%;
     left: 50%;
     font-size: 1.8rem;
-    margin: -120px 0 0 -170px;
+    margin: -150px 0 0 -150px;
     font-family: 'Lora', sans-serif;
 }
 
@@ -568,7 +568,6 @@ table th {
 .title-shown {
     opacity: 1;
     transition: all 600ms ease-in;
-
     -webkit-animation: flickerAnimation 1s infinite;
     -moz-animation: flickerAnimation 1s infinite;
     -o-animation: flickerAnimation 1s infinite;
@@ -634,15 +633,10 @@ table th {
 @media only screen and (max-width: 768px) {
 
   .user-info {
-    /* padding: 2rem 0; */
-    /* margin-top: 6rem; */
-    /* margin-right: 2rem; */
     padding: 0;
     margin: 0.5rem auto;
     float: none;
     text-align: center;
-    /* display: block; */
-    /* width: 15rem; */
 }
 
 .sub-container {
@@ -663,33 +657,18 @@ table th {
 }
 
 .tweet-body {
-    /* margin-top: 7rem;
-    width: 32rem;
-    overflow-wrap: break-word;
-    font-size: 1rem;
-    padding: 2rem; */
-    /* margin: 0; */
     margin: 0.8rem auto;
     float: none;
     color: var(--dark-color);
     background-color: white;
     border-top: var(--light-purple) 0.1px solid ;
     border-bottom: var(--light-purple) 0.1px solid ;
-
     border-left: none;
     border-right: none;
     width: auto;
-    /* border-right: var(--light-purple) 0.1px solid;
-    border-left: var(--light-purple) 0.1px solid; */
 }
 
 .date {
-    /* margin-top: 6rem;
-    overflow-wrap: break-word;
-    width: 12rem;
-    padding: 3rem; */
-    /* text-align: left; */
-    /* font-size: 0.8rem;  */
     padding: 0;
     margin: 0 auto 3rem;
     float: none;
@@ -738,7 +717,7 @@ table th {
     }
 
     .hero {
-        margin-top: 3rem;
+        margin-top: 7rem;
     }
 
     .username {
