@@ -1,10 +1,11 @@
 import TweetItem from './components/tweets/TweetItem';
 import './App.css';
 import React, { Component } from 'react';
-import Hero from './components/layout/Hero';
 import Navbar from './components/layout/Navbar';
 import About from './components/pages/About';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Loader from './components/layout/Loader';
+import Alert from './components/layout/Alert';
 
 export default class App extends Component {
     constructor(props) {
@@ -12,8 +13,20 @@ export default class App extends Component {
         this.state = {
             data: [],
             text: '',
-            isClear: false
+            showLoading: false,
+            alert: null
         };
+    }
+
+    componentDidMount() {
+        this.setState({
+            showLoading: true
+        });
+        setTimeout(() => {
+            this.setState({
+                showLoading: false
+            });
+        }, 2000);
     }
 
     getData = text => {
@@ -28,22 +41,31 @@ export default class App extends Component {
 
     onSubmit = e => {
         e.preventDefault();
-        if (this.state.text.length > 5) {
+        // if (this.state.text.length > 5 || this.state.text === '') {
+        if (this.state.text === '' ) {
+            // this.setAlert('Please enter a stock symbol', 'light');
+            this.setAlert('Please enter a stock symbol', 'light');
+            setTimeout(() => this.setState({ alert: null }), 5000);
+        } else {
+            this.getData(this.state.text);
         }
-        this.getData(this.state.text);
-        this.setState({ isClear: false });
     };
 
     onChange = e => {
         this.setState({ text: e.target.value });
-        console.log(this.state.text);
+        // console.log(this.state.text);
     };
 
-    clearTweets = e => {
+    clearTweets = () => {
         this.setState({
-            isClear: true,
             data: []
         });
+    };
+
+    setAlert = (msg, type) => {
+        // console.log('alert');
+        this.setState({ alert: { msg, type } });
+        setTimeout(() => this.setState({ alert: null }), 5000);
     };
 
     render() {
@@ -54,35 +76,78 @@ export default class App extends Component {
                     <Switch>
                         <Route exact path='/'>
                             <div className='container'>
-                                <Hero />
-                                <form className='form' onSubmit={this.onSubmit}>
-                                    <input
-                                        type='text'
-                                        name='text'
-                                        placeholder='Enter stock symbol, e.g. AAPL'
-                                        value={this.text}
-                                        onChange={this.onChange}
-                                    />
-                                {this.state.data.length < 1 && (
-
-                                    <input
-                                        type='submit'
-                                        value='Search'
-                                        className='btn-primary'
-                                    />
-                                )}
-
-                                </form>
-                                {this.state.data.length > 0 && (
-                                    <button
-                                        className='btn btn-light'
-                                        onClick={this.clearTweets}
+                                <Alert alert={this.state.alert} />
+                                <div
+                                    className={`loading-logo ${
+                                        this.state.showLoading
+                                            ? 'title-shown'
+                                            : 'hidden'
+                                    }`}
+                                >
+                                    <Loader />
+                                </div>
+                                <div
+                                    className={`hero  ${
+                                        this.state.showLoading
+                                            ? 'hidden'
+                                            : 'shown'
+                                    }`}
+                                >
+                                    <p className='hero-header'>
+                                        Search twitter stock feeds.
+                                    </p>
+                                    <form
+                                        className='form'
+                                        onSubmit={this.onSubmit}
                                     >
-                                        Clear
-                                    </button>
-                                )}
+                                        <input
+                                            type='text'
+                                            name='text'
+                                            placeholder='Enter your stock symbol'
+                                            value={this.state.text}
+                                            onChange={this.onChange}
+                                        />
 
+                                        {this.state.data.length < 1 && (
+                                            <input
+                                                type='submit'
+                                                value='Search'
+                                                className='btn-primary'
+                                            />
+                                        )}
+                                    </form>
+                                    {this.state.data.length > 0 && (
+                                        <button
+                                            className='btn-light'
+                                            onClick={this.clearTweets}
+                                        >
+                                            Clear
+                                        </button>
+                                    )}
+                                </div>
                                 <div className='sub-container'>
+                                    <div className>
+                                        {this.state.data.length > 0 && (
+                                            <h3 className='trending-header'>
+                                                {this.state.text} Trending
+                                            </h3>
+                                        )}
+                                    </div>
+                                    <div className='trending-info'>
+                                        {this.state.data.length > 0 && (
+                                            <>
+                                                <h3 className='trending-account'>
+                                                    Account
+                                                </h3>
+                                                <h3 className='trending-tweet'>
+                                                    Tweet
+                                                </h3>
+                                                <h3 className='trending-time'>
+                                                    Time
+                                                </h3>
+                                            </>
+                                        )}
+                                    </div>
                                     {this.state.data.map(tweet => (
                                         <TweetItem
                                             key={tweet.id}
