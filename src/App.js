@@ -31,7 +31,9 @@ export default class App extends Component {
     }
 
     getData = text => {
-        fetch(`https://api.stocktwits.com/api/2/streams/symbol/${text}.json`)
+        fetch(`https://api.stocktwits.com/api/2/streams/symbol/${text}.json`,{
+            mode: 'cors'
+        })
             .then(response => {
                 if (response.status >= 200 && response.status <= 299) {
                     return response.json();
