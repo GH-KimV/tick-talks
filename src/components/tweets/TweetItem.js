@@ -6,12 +6,12 @@ export default class TweetItem extends Component {
     componentDidMount() {
         const { text, getData } = this.props;
 
-        this.intervalId = setInterval(() => getData(text), 30000);
+        this.intervalId = setInterval(() => getData(text), 600000);
         console.log('tweet component mounted');
         console.log('symbol searched', text);
     }
 
-    componentWillUnmount() {
+    componentDidUpdate() {
         clearInterval(this.intervalId);
         console.log('tweet component updated');
     }
