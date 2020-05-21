@@ -6,7 +6,7 @@ export default class TweetItem extends Component {
     componentDidMount() {
         const { text, getData } = this.props;
 
-        this.intervalId = setInterval(() => getData(text), 20000);
+        this.intervalId = setInterval(() => getData(text), 30000);
         console.log('tweet component mounted');
         console.log('symbol searched', text);
     }
