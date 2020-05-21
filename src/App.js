@@ -72,7 +72,7 @@ export default class App extends Component {
                     this.setState({
                         isError: false
                     });
-                }, 2000)
+                }, 20000)
             );
     };
 
