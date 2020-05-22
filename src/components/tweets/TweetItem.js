@@ -11,7 +11,7 @@ export default class TweetItem extends Component {
         console.log('symbol searched', text);
     }
 
-    componentDidUpdate() {
+    componentWillUnmount() {
         clearInterval(this.intervalId);
         console.log('tweet component updated');
     }
